@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Permissions for audio recording and speech recognition -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- Notification permissions -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    
+    <!-- Speech recognition specific permissions -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    
+    <!-- Bluetooth permissions -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    
+    <!-- Location permission for Bluetooth device discovery -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    
+    <!-- ATAK and geolocation specific permissions -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    
+    <!-- Network permissions for TAK Server connectivity -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    
+    <!-- File system permissions for tactical data caching -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
+    <!-- System permissions for tactical operations -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    
+    <!-- Query declarations for speech recognition services -->
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VOICE_COMMAND" />
+        </intent>
+        <!-- ATAK application integration -->
+        <package android:name="com.atakmap.android.civ" />
+        <package android:name="com.atakmap.android.tak" />
+        <package android:name="tak.gov" />
+        <package android:name="com.google.android.googlequicksearchbox" />
+        <package android:name="com.samsung.android.bixby.agent" />
+        <package android:name="com.samsung.android.visionintelligence" />
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Somewear_demo"
+        tools:targetApi="31">
+        <activity
+            android:name=".TranscribeAndSendActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Somewear_demo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- ATAK Geolocation Service -->
+        <service
+            android:name=".services.AtakGeolocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:description="@string/atak_service_description"
+            android:foregroundServiceType="location" />
+
+        <!-- Somewear Location Service -->
+        <service
+            android:name=".services.SomewearLocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:description="@string/location_service_description"
+            android:foregroundServiceType="location" />
+
+        <!-- Geospatial Data Service -->
+        <service
+            android:name=".services.GeospatialDataService"
+            android:enabled="true"
+            android:exported="false"
+            android:description="@string/geospatial_service_description" />
+
+        <!-- Intent filters for ATAK integration -->
+        <activity-alias
+            android:name=".AtakIntegrationActivity"
+            android:targetActivity=".TranscribeAndSendActivity"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.atakmap.android.maps.SHOW_POINT" />
+                <action android:name="com.atakmap.android.maps.COORDINATE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="geo" />
+            </intent-filter>
+        </activity-alias>
+    </application>
+
+</manifest>
