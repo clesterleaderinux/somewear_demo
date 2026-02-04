@@ -1,3 +1,7 @@
+https://uxforward.me/usb-firmware-update
+All the others
+https://uxforward.me/
+
 I carved out some time on Sunday to take a deeper look at your product and better understand what your team is looking for. After speaking with Ian, I wanted to explore a few ideas and get a clearer sense of how your system operates, so I put together a quick prototype to illustrate my initial thinking.
 
 I also did not have prior experience with ATAK, so I spent time researching how its services could be integrated. The code I wrote is only a stub at this stage, but it reflects my understanding of how the system functions and how I would begin approaching an integration.
