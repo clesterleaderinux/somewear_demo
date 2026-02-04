@@ -1,10 +1,15 @@
 Why would I want to work at Somewear Labs -
 
 Your work directly contributes to saving lives
+
 The problems you tackle are technically challenging and genuinely engaging
+
 The culture values curiosity, resourcefulness, and taking action
+
 You can make a big impact as part of a small, high‑performing team
+
 The team is known for being highly collaborative and respectful—an essential part of how they operate
+
 I love the lack of commute
 
 Best practices and history
